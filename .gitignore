@@ -49,3 +49,11 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/aws
+
+# sst
+.sst
+
+
+# open-next
+.open-next
