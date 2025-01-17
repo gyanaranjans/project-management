@@ -69,7 +69,9 @@ export const authConfig = {
     strategy: "jwt"
   },
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/signin',
+    
   },
+  trustHost: true
 
 } satisfies NextAuthConfig;
