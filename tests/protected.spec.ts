@@ -40,4 +40,31 @@ test.describe('Protected Routes', () => {
     // Should redirect to login
     await expect(page).toHaveURL('/signin');
   });
+
+
+  test('tasks page shows task list and creation', async ({ page }) => {
+    await page.goto('/tasks');
+    await expect(page.getByRole('heading', { name: 'Tasks' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Create Task' }).click();
+    await page.getByPlaceholder('Task title').fill('Testing');
+    await page.getByPlaceholder('Task description').fill('Test Desc');
+
+    // Priority selection
+    await page.getByLabel('Priority').click();
+    await page.getByLabel('Medium').click();
+
+    // Add due date and assignee
+    await page.getByLabel('Due Date').fill('2025-01-25');
+    await page.getByLabel('Assign To').click();
+    await page.getByLabel('Test-playwright').click();
+
+    await page.getByRole('button', { name: 'Create Task' }).click();
+
+    // Verify task creation
+    await expect(page.locator('h3', { hasText: 'Testing' }).first()).toBeVisible();
+    await expect(page.locator('body')).toContainText('MEDIUM');
+  });
+
+
 });
