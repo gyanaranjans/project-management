@@ -31,22 +31,28 @@ const projectSchema = z.object({
 
 type ProjectFormValues = z.infer<typeof projectSchema>;
 
-export function ProjectForm({
-  onSubmit,
-}: {
+type ProjectFormProps = {
   onSubmit: (data: ProjectFormValues) => void;
-}) {
+  defaultValues?: {
+    name: string;
+    description: string;
+    members: string[];
+  };
+};
+
+export function ProjectForm({ onSubmit, defaultValues }: ProjectFormProps) {
   const { data: users } = api.user.getAll.useQuery();
 
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
-    defaultValues: {
+    defaultValues: defaultValues || {
       name: "",
       description: "",
       members: [],
     },
+    values: defaultValues,
   });
-
+  const isEditing = !!defaultValues;
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -140,7 +146,9 @@ export function ProjectForm({
           )}
         />
 
-        <Button type="submit">Create Project</Button>
+        <Button type="submit">
+          {isEditing ? "Update Project" : "Create Project"}
+        </Button>
       </form>
     </Form>
   );

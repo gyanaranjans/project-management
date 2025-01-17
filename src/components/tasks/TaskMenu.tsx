@@ -8,10 +8,17 @@ import { Button } from "@/components/ui/button";
 import { MoreVertical } from "lucide-react";
 import { api } from "@/trpc/react";
 
-export function TaskMenu({ task }: { task: any }) {
+export function TaskMenu({
+  task,
+  projectId,
+}: {
+  task: any;
+  projectId?: string;
+}) {
   const utils = api.useUtils();
   const updateTask = api.task.update.useMutation({
     onSuccess: () => {
+      utils.project.getById.invalidate(projectId);
       utils.task.getAll.invalidate();
     },
   });

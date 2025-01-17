@@ -2,10 +2,10 @@ import "@/styles/globals.css";
 
 import { redirect } from "next/navigation";
 import { auth } from "@/server/auth";
-import { MainNav } from "@/components/MainNav";
+
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {
@@ -17,15 +17,19 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // const session = await auth();
-
-  // if (!session) {
-  //   redirect("/signin");
-  // }
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

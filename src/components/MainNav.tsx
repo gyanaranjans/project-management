@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
 import { Button } from "./ui/button";
+import { ModeToggle } from "./ThemeSwitcher";
 import {
   LogOut,
   LayoutDashboard,
@@ -57,14 +58,17 @@ export function MainNav() {
             </div>
           </div>
 
-          <Button
-            variant="ghost"
-            onClick={() => signOut({ callbackUrl: "/signin" })}
-            className="flex items-center space-x-2 hover:bg-accent"
-          >
-            <LogOut className="h-4 w-4" />
-            <span>Logout</span>
-          </Button>
+          <div className="flex items-center space-x-4">
+            <ModeToggle />
+            <Button
+              variant="ghost"
+              onClick={() => signOut({ callbackUrl: "/signin" })}
+              className="flex items-center space-x-2 hover:bg-accent"
+            >
+              <LogOut className="h-4 w-4" />
+              <span>Logout</span>
+            </Button>
+          </div>
         </div>
       </div>
     </nav>

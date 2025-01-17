@@ -93,6 +93,7 @@ export default function ProjectDetailsPage() {
           <div className="mt-4">
             <TaskList
               tasks={project.tasks.filter((task) => task.status === "TODO")}
+              projectId={projectId}
             />
           </div>
         </Card>
@@ -104,6 +105,7 @@ export default function ProjectDetailsPage() {
               tasks={project.tasks.filter(
                 (task) => task.status === "IN_PROGRESS",
               )}
+              projectId={projectId}
             />
           </div>
         </Card>
@@ -113,6 +115,7 @@ export default function ProjectDetailsPage() {
           <div className="mt-4">
             <TaskList
               tasks={project.tasks.filter((task) => task.status === "DONE")}
+              projectId={projectId}
             />
           </div>
         </Card>

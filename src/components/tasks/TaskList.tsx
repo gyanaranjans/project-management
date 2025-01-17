@@ -18,6 +18,7 @@ interface Task {
 
 interface TaskListProps {
   tasks: Task[];
+  projectId?: string;
 }
 const getPriorityVariant = (priority: "LOW" | "MEDIUM" | "HIGH") => {
   switch (priority) {
@@ -30,7 +31,7 @@ const getPriorityVariant = (priority: "LOW" | "MEDIUM" | "HIGH") => {
   }
 };
 
-export function TaskList({ tasks }: TaskListProps) {
+export function TaskList({ tasks, projectId }: TaskListProps) {
   if (!tasks?.length) {
     return <div>No tasks found</div>;
   }
@@ -44,7 +45,7 @@ export function TaskList({ tasks }: TaskListProps) {
               <Badge variant={getPriorityVariant(task.priority)}>
                 {task.priority}
               </Badge>
-              <TaskMenu task={task} />
+              <TaskMenu task={task} projectId={projectId} />
             </div>
           </div>
           {task.description && (
