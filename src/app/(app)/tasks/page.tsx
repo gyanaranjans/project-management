@@ -22,7 +22,7 @@ export default function TasksPage() {
       setOpen(false);
     },
   });
-  const handleSubmit = (data: TaskFormValues) => {
+  const handleSubmit = (data: any) => {
     createTask.mutate({
       ...data,
       dueDate: data.dueDate ? new Date(data.dueDate) : undefined,
