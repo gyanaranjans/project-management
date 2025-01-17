@@ -4,6 +4,10 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
 
 export default function SignIn() {
   const router = useRouter();
@@ -29,7 +33,7 @@ export default function SignIn() {
         return;
       }
 
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     } catch (error) {
       setError("Something went wrong");
@@ -39,54 +43,51 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-      <div className="w-full max-w-md rounded-lg bg-white/10 p-8 shadow-md">
-        <h2 className="mb-6 text-center text-3xl font-bold text-white">
-          Sign In
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm text-gray-200">
-              Email
-            </label>
-            <input
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <Card className="w-full max-w-md p-8">
+        <div className="flex flex-col space-y-2 text-center">
+          <h1 className="text-2xl font-semibold tracking-tight">
+            Welcome back
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Enter your credentials to sign in to your account
+          </p>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4 pt-8">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full rounded-lg px-4 py-2 text-black"
               required
             />
           </div>
-          <div>
-            <label htmlFor="password" className="block text-sm text-gray-200">
-              Password
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="password">Password</Label>
+            <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 w-full rounded-lg px-4 py-2 text-black"
               required
             />
           </div>
-          {error && <p className="text-center text-red-500">{error}</p>}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full rounded-lg bg-white/10 px-4 py-2 font-semibold text-white transition hover:bg-white/20 disabled:opacity-50"
-          >
+          {error && (
+            <p className="text-center text-sm text-destructive">{error}</p>
+          )}
+          <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Signing in..." : "Sign In"}
-          </button>
+          </Button>
         </form>
-        <p className="mt-4 text-center text-gray-300">
+        <div className="mt-4 text-center text-sm">
           Don't have an account?{" "}
-          <Link href="/signup" className="text-white hover:underline">
+          <Link href="/signup" className="text-primary hover:underline">
             Sign up
           </Link>
-        </p>
-      </div>
+        </div>
+      </Card>
     </div>
   );
 }
