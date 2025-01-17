@@ -30,8 +30,8 @@ export default function ProfilePage() {
   const utils = api.useUtils();
 
   const updateProfile = api.user.updateProfile.useMutation({
-    onSuccess: () => {
-      utils.user.getProfile.invalidate();
+    onSuccess: async () => {
+      await utils.user.getProfile.invalidate();
     },
   });
 

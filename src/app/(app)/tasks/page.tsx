@@ -17,8 +17,8 @@ export default function TasksPage() {
   const [open, setOpen] = useState(false);
   const utils = api.useUtils();
   const createTask = api.task.create.useMutation({
-    onSuccess: () => {
-      utils.task.getAll.invalidate();
+    onSuccess: async () => {
+      await utils.task.getAll.invalidate();
       setOpen(false);
     },
   });

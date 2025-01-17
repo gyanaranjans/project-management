@@ -23,8 +23,8 @@ export default function ProjectsPage() {
   const utils = api.useUtils();
 
   const createProject = api.project.create.useMutation({
-    onSuccess: () => {
-      utils.project.getAll.invalidate();
+    onSuccess: async () => {
+      await utils.project.getAll.invalidate();
       setOpen(false);
     },
   });

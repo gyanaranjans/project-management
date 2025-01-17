@@ -1,21 +1,31 @@
 // src/components/tasks/TaskList.tsx
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { api } from "@/trpc/react";
+
 import { format } from "date-fns";
 import { TaskMenu } from "@/components/tasks/TaskMenu";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
-  description?: string;
+  description: string | null;
   priority: "LOW" | "MEDIUM" | "HIGH";
   status: "TODO" | "IN_PROGRESS" | "DONE";
-  dueDate?: Date;
-  assignedTo: { name: string };
-  project?: { name: string };
+  dueDate: Date | null;
+  assignedTo: {
+    id: string;
+    name: string | null;
+  };
+  project?: {
+    id: string;
+    name: string;
+  };
+  tags?: Array<{
+    id: string;
+    name: string;
+    color: string;
+  }>;
 }
-
 interface TaskListProps {
   tasks: Task[];
   projectId?: string;

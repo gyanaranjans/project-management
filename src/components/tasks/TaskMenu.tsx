@@ -17,9 +17,9 @@ export function TaskMenu({
 }) {
   const utils = api.useUtils();
   const updateTask = api.task.update.useMutation({
-    onSuccess: () => {
-      utils.project.getById.invalidate(projectId);
-      utils.task.getAll.invalidate();
+    onSuccess: async () => {
+      await utils.project.getById.invalidate(projectId);
+      await utils.task.getAll.invalidate();
     },
   });
 

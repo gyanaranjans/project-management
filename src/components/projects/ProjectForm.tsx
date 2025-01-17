@@ -45,7 +45,7 @@ export function ProjectForm({ onSubmit, defaultValues }: ProjectFormProps) {
 
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
-    defaultValues: defaultValues || {
+    defaultValues: defaultValues ?? {
       name: "",
       description: "",
       members: [],
@@ -96,7 +96,7 @@ export function ProjectForm({ onSubmit, defaultValues }: ProjectFormProps) {
               <FormLabel>Team Members</FormLabel>
               <Select
                 onValueChange={(value) => {
-                  const currentMembers = field.value || [];
+                  const currentMembers = field.value ?? [];
                   if (!currentMembers.includes(value)) {
                     field.onChange([...currentMembers, value]);
                   }

@@ -37,6 +37,7 @@ export default function SignIn() {
       router.refresh();
     } catch (error) {
       setError("Something went wrong");
+      console.error(error);
     } finally {
       setLoading(false);
     }

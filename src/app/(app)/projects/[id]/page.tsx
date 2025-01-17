@@ -25,8 +25,8 @@ export default function ProjectDetailsPage() {
 
   const { data: project, isLoading } = api.project.getById.useQuery(projectId);
   const createTask = api.task.create.useMutation({
-    onSuccess: () => {
-      utils.project.getById.invalidate(projectId);
+    onSuccess: async () => {
+      await utils.project.getById.invalidate(projectId);
       setOpen(false);
     },
   });
