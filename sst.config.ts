@@ -16,7 +16,7 @@ export default $config({
     };
   },
   async run() {
-    const site = new sst.aws.Nextjs("MyWeb", {
+    new sst.aws.Nextjs("MyWeb", {
       environment: {
         AUTH_SECRET: process.env.AUTH_SECRET!,
         DATABASE_URL: process.env.DATABASE_URL!,
@@ -33,13 +33,5 @@ export default $config({
       logging: "per-function",
       warm: 5
     });
-
-    // Output the site URL
-    return {
-      stack: site,
-      outputs: {
-        url: site.url
-      }
-    };
   },
 });
