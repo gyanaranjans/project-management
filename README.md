@@ -1,12 +1,3 @@
-### Plan:
-
-1. Update README with:
-   - Project overview
-   - Setup instructions
-   - Testing details
-   - SST deployment steps
-   - Environment configuration
-
 # Project Management App
 
 A full-stack project management application built with the T3 Stack and deployed on AWS using SST.

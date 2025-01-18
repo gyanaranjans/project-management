@@ -16,7 +16,7 @@ export default $config({
     };
   },
   async run() {
-    const site = new sst.aws.Nextjs("MyWeb", {
+    new sst.aws.Nextjs("MyWeb", {
       environment: {
         AUTH_SECRET: process.env.AUTH_SECRET!,
         DATABASE_URL: process.env.DATABASE_URL!,
@@ -26,15 +26,7 @@ export default $config({
     });
 
     
-    site.createEnvironment({
-      NEXTAUTH_URL: site.url || "http://localhost:3000",
-    });
-
-    return {
-      stack: site,
-      outputs: {
-        url: site.url
-      }
-    };
+    
+    
   },
 });
