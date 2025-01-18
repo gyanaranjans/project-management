@@ -8,11 +8,17 @@ export default $config({
       removal: input?.stage === "production" ? "retain" : "remove",
       protect: ["production"].includes(input?.stage),
       home: "aws",
+      providers: {
+        aws: {
+          region: "ap-south-1"
+        }
+      }
+
     };
   },
   async run() {
-    new sst.aws.Nextjs("MyWeb",{
-      environment:{
+    new sst.aws.Nextjs("MyWeb", {
+      environment: {
         AUTH_SECRET: process.env.AUTH_SECRET ?? 'auth',
         DATABASE_URL: process.env.DATABASE_URL ?? 'gyana'
 
