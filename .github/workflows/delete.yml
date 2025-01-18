@@ -1,0 +1,30 @@
+name: Delete SST Stack from AWS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Install projects deps
+        run: npm install
+
+      - name: Install AWS Creds
+        run: |
+          mkdir -p ~/.aws
+          echo "[default]" > ~/.aws/credentials
+          echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+          echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+
+      - name: Delete AWS Stack with SST
+        run: npx sst remove --stage prod
+
+      - name: Clean Up AWS Profile
+        run: |
+          rm -rf ~/.aws
