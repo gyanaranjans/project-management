@@ -11,6 +11,7 @@ on:
       - "prisma/**"
       - ".github/**"
       - "package.json"
+      - "sst.config.ts"
 
 jobs:
   deploy:
