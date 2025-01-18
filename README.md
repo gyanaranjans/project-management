@@ -1,29 +1,132 @@
-# Create T3 App
+### Plan:
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+1. Update README with:
+   - Project overview
+   - Setup instructions
+   - Testing details
+   - SST deployment steps
+   - Environment configuration
 
-## What's next? How do I make an app with this?
+# Project Management App
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+A full-stack project management application built with the T3 Stack and deployed on AWS using SST.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Tech Stack
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- [Next.js](https://nextjs.org) - React Framework
+- [NextAuth.js](https://next-auth.js.org) - Authentication
+- [Prisma](https://prisma.io) - Database ORM
+- [tRPC](https://trpc.io) - Type-safe API
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [Playwright](https://playwright.dev) - E2E Testing
+- [SST](https://sst.dev) - AWS Deployment
 
-## Learn More
+## Getting Started
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+1. Clone the repository:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```bash
+git clone https://github.com/yourusername/project-management-app.git
+```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+2. Install dependencies:
 
-## How do I deploy this?
+```bash
+npm install
+```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+3. Setup environment variables:
+
+```env
+DATABASE_URL=
+AUTH_SECRET=
+```
+
+4. Setup database:
+
+```bash
+npm run db:push
+```
+
+5. Run development server:
+
+```bash
+npm run dev
+```
+
+## Testing
+
+### E2E Tests with Playwright
+
+```bash
+# Install browsers
+npx playwright install
+
+# Run tests
+npm run test
+
+# Run tests with UI
+npm run test:ui
+```
+
+## Deployment
+
+### Deploy to AWS using SST
+
+1. Configure AWS credentials:
+
+```bash
+aws configure
+```
+
+2. Deploy:
+
+```bash
+npx sst deploy --stage prod
+```
+
+3. Remove deployment:
+
+```bash
+npx sst remove --stage prod
+```
+
+### Environment Variables for Production
+
+Required environment variables in GitHub Secrets for CI/CD:
+
+-
+
+AUTH_SECRET
+
+-
+
+DATABASE_URL
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+
+## Project Structure
+
+```
+project-management-app/
+├── src/
+│   ├── app/          # Next.js App Router
+│   ├── components/   # React Components
+│   ├── server/       # tRPC Routes & DB
+│   └── types/        # TypeScript Types
+├── prisma/           # Database Schema
+├── tests/           # Playwright Tests
+└── sst.config.ts    # SST Configuration
+```
+
+## Contributing
+
+1. Create a feature branch
+2. Make changes
+3. Run tests
+4. Submit PR
+
+## License
+
+MIT
